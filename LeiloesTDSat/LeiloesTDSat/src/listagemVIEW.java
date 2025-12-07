@@ -205,6 +205,8 @@ public class listagemVIEW extends javax.swing.JFrame {
         try {
             ProdutosDAO produtosdao = new ProdutosDAO();
             
+            produtosdao.conectar();
+            
             DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
             model.setNumRows(0);
             
@@ -218,8 +220,11 @@ public class listagemVIEW extends javax.swing.JFrame {
                     listagem.get(i).getStatus()
                 });
             }
+            produtosdao.desconectar();
         } catch (Exception e) {
+            
         }
+        
     
     }
 }
