@@ -65,6 +65,19 @@ public class ProdutosDAO {
     
     }
     
+    public void venderProduto(int id){
+        try{
+            conectar();
+            prep = conn.prepareStatement("UPDATE produtos SET status = ? WHERE id = ?");
+            prep.setString(1, "Vendido");
+            prep.setInt(2, id);
+            prep.executeUpdate();
+            desconectar();
+        }catch(SQLException ex){
+            System.out.println("Erro ao conectar"+ex.getMessage());
+        }
+    }
+    
     
     
         
