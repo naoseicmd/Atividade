@@ -18,10 +18,32 @@ public class vendasVIEW extends javax.swing.JFrame {
      */
     public vendasVIEW() {
         initComponents();
+        acharVendas();
     }
     
     public void acharVendas(){
-        
+        try {
+            ProdutosDAO produtosdao = new ProdutosDAO();
+            
+            produtosdao.conectar();
+            
+            DefaultTableModel model = (DefaultTableModel) listaVendas.getModel();
+            model.setNumRows(0);
+            
+            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutosVendidos();
+            
+            for(int i = 0; i < listagem.size(); i++){
+                model.addRow(new Object[]{
+                    listagem.get(i).getId(),
+                    listagem.get(i).getNome(),
+                    listagem.get(i).getValor(),
+                    listagem.get(i).getStatus()
+                });
+            }
+            produtosdao.desconectar();
+        } catch (Exception e) {
+            
+        }
     }
     
     /**
@@ -50,7 +72,7 @@ public class vendasVIEW extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nome", "Valor", "Status"
             }
         ));
         jScrollPane1.setViewportView(listaVendas);
@@ -131,8 +153,7 @@ public class vendasVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnAtualizarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarListaActionPerformed
-        
-        
+        acharVendas();
     }//GEN-LAST:event_btnAtualizarListaActionPerformed
 
     /**
