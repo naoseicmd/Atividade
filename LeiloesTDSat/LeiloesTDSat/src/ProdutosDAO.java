@@ -78,6 +78,10 @@ public class ProdutosDAO {
         }
     }
     
+    //public ArrayList<ProdutosDTO> listarProdutosVendidos(){
+    //    
+    //}
+    
     
     
         
